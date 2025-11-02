@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Truck extends Vehicle {
-    private Double loadCapacityTons;
-    private Integer numberOfAxles;
+    private double loadCapacityTons;
+    private int numberOfAxles;
     private String cargoType;
 
     /**
      * Constructor with parent class parameters
      */
-    public Truck(String id, String brand, String model, Integer year, 
-                 String color, Double price, Double loadCapacityTons, 
-                 Integer numberOfAxles, String cargoType) {
+    public Truck(String id, String brand, String model, int year, 
+                 String color, double price, double loadCapacityTons, 
+                 int numberOfAxles, String cargoType) {
         super(id, brand, model, year, color, price);
         this.loadCapacityTons = loadCapacityTons;
         this.numberOfAxles = numberOfAxles;
@@ -34,17 +34,17 @@ public class Truck extends Vehicle {
     }
 
     @Override
-    public Double calculateMaintenanceCost() {
+    public double calculateMaintenanceCost() {
         // Maintenance cost based on load capacity and axles
-        Double baseCost = 200000.0; // Base cost in local currency
-        Double loadMultiplier = loadCapacityTons * 5000;
-        Double axleMultiplier = numberOfAxles * 15000.0;
+        double baseCost = 200000.0; // Base cost in local currency
+        double loadMultiplier = loadCapacityTons * 5000;
+        double axleMultiplier = numberOfAxles * 15000.0;
         return baseCost + loadMultiplier + axleMultiplier;
     }
 
     @Override
     public String getFullDescription() {
-        return super.getFullDescription() + String.format(" - Capacity: %.1f tons - Axles: %d - Cargo: %s", 
-            loadCapacityTons, numberOfAxles, cargoType);
+        return String.format("%s - Capacity: %.1f tons - Axles: %d - Cargo: %s", 
+            super.getFullDescription(), loadCapacityTons, numberOfAxles, cargoType);
     }
 }

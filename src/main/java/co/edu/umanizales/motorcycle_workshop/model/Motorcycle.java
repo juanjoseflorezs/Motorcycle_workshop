@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Motorcycle extends Vehicle {
-    private Integer engineCC;
+    private int engineCC;
     private String transmissionType;
-    private Boolean hasWindshield;
+    private boolean hasWindshield;
 
     /**
      * Constructor with parent class parameters
      */
-    public Motorcycle(String id, String brand, String model, Integer year, 
-                     String color, Double price, Integer engineCC, 
-                     String transmissionType, Boolean hasWindshield) {
+    public Motorcycle(String id, String brand, String model, int year, 
+                     String color, double price, int engineCC, 
+                     String transmissionType, boolean hasWindshield) {
         super(id, brand, model, year, color, price);
         this.engineCC = engineCC;
         this.transmissionType = transmissionType;
@@ -34,16 +34,19 @@ public class Motorcycle extends Vehicle {
     }
 
     @Override
-    public Double calculateMaintenanceCost() {
+    public double calculateMaintenanceCost() {
         // Maintenance cost based on engine CC
-        Double baseCost = 50000.0; // Base cost in local currency
-        Double ccMultiplier = engineCC / 100.0;
+        double baseCost = 50000.0; // Base cost in local currency
+        double ccMultiplier = engineCC / 100.0;
         return baseCost * ccMultiplier;
     }
 
     @Override
     public String getFullDescription() {
-        return super.getFullDescription() + String.format(" - Engine: %dCC - Transmission: %s", 
-            engineCC, transmissionType);
+        return String.format("%s - Engine: %dCC - Transmission: %s - Windshield: %s", 
+            super.getFullDescription(), 
+            engineCC, 
+            transmissionType != null ? transmissionType : "N/A", 
+            hasWindshield ? "Yes" : "No");
     }
 }

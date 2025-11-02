@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Car extends Vehicle {
-    private Integer numberOfDoors;
+    private int numberOfDoors;
     private String fuelType;
-    private Double fuelConsumption;
+    private double fuelConsumption;
 
     /**
      * Constructor with parent class parameters
      */
-    public Car(String id, String brand, String model, Integer year, 
-               String color, Double price, Integer numberOfDoors, 
-               String fuelType, Double fuelConsumption) {
+    public Car(String id, String brand, String model, int year, 
+               String color, double price, int numberOfDoors, 
+               String fuelType, double fuelConsumption) {
         super(id, brand, model, year, color, price);
         this.numberOfDoors = numberOfDoors;
         this.fuelType = fuelType;
@@ -34,16 +34,16 @@ public class Car extends Vehicle {
     }
 
     @Override
-    public Double calculateMaintenanceCost() {
+    public double calculateMaintenanceCost() {
         // Maintenance cost based on fuel consumption
-        Double baseCost = 100000.0; // Base cost in local currency
-        Double consumptionMultiplier = fuelConsumption * 10;
+        double baseCost = 100000.0; // Base cost in local currency
+        double consumptionMultiplier = fuelConsumption * 10;
         return baseCost + consumptionMultiplier;
     }
 
     @Override
     public String getFullDescription() {
-        return super.getFullDescription() + String.format(" - Doors: %d - Fuel: %s (%.1f L/100km)", 
-            numberOfDoors, fuelType, fuelConsumption);
+        return String.format("%s - Doors: %d - Fuel: %s (%.1f L/100km)", 
+            super.getFullDescription(), numberOfDoors, fuelType, fuelConsumption);
     }
 }

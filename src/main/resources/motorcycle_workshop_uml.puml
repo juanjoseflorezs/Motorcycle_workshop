@@ -1,0 +1,88 @@
+@startuml Motorcycle Workshop Class Diagram
+
+' Set theme and skin parameters
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classFontSize 14
+skinparam classFontName Arial
+skinparam shadowing false
+
+' Define classes
+class Client {
+  - String clientId
+  - String firstName
+  - String lastName
+  - String email
+  - String phone
+  - String address
+  - String city
+  - String documentType
+  - String documentNumber
+  - String registrationDate
+  + String getFullName()
+  + String getClientInfo()
+  + void updateProfile()
+}
+
+class Motorcycle {
+  - int engineCC
+  - String transmissionType
+  - boolean hasWindshield
+  + String getVehicleType()
+  + double calculateMaintenanceCost()
+  + String getFullDescription()
+}
+
+class Service {
+  - String serviceId
+  - String serviceName
+  - String description
+  - double baseCost
+  - double estimatedHours
+  - String category
+  - boolean isActive
+  + double calculateCost(double hourlyRate)
+  + String getServiceDetails()
+  + String getServiceInfo()
+  + boolean isAvailable()
+}
+
+class Inventory {
+  - String inventoryId
+  - List<SparePart> spareParts
+  - String lastUpdated
+  - String warehouseLocation
+  + void addPart(SparePart part)
+  + boolean removePart(String partId)
+  + SparePart findPart(String partId)
+  + List<SparePart> getLowStockParts()
+  + int getTotalPartsCount()
+}
+
+class SparePart {
+  - String partId
+  - String name
+  - String brand
+  - String category
+  - Double unitPrice
+  - Integer quantityInStock
+  - Integer minimumStock
+  - String vehicleType
+  - String supplier
+  - String location
+  + boolean isAvailable()
+  + boolean isLowStock()
+  + void updateStock(int quantity)
+}
+
+' Define relationships
+Client "1" -- "0..*" Motorcycle : owns >
+Service "1" -- "0..*" Motorcycle : services >
+Inventory "1" -- "1..*" SparePart : contains >
+Service "0..*" -- "0..*" SparePart : uses >
+
+' Add notes
+note "The Motorcycle class extends Vehicle abstract class" as N1
+Motorcycle .. N1
+
+@enduml
