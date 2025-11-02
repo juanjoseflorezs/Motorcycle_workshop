@@ -14,16 +14,16 @@ public class Service {
     private String serviceId;
     private String serviceName;
     private String description;
-    private Double baseCost;
-    private Double estimatedHours;
+    private double baseCost;
+    private double estimatedHours;
     private String category;
-    private Boolean isActive;
+    private boolean isActive;
 
     /**
      * Calculate service cost with labor
      * Labor cost = baseCost + (estimatedHours * hourlyRate)
      */
-    public Double calculateCost(Double hourlyRate) {
+    public double calculateCost(double hourlyRate) {
         return baseCost + (estimatedHours * hourlyRate);
     }
 
@@ -31,23 +31,22 @@ public class Service {
      * Get service details
      */
     public String getServiceDetails() {
-        return String.format("Service: %s (%s) - Description: %s - Base Cost: %.2f - Hours: %.1f",
-            serviceName, serviceId, description, baseCost, estimatedHours);
+        return String.format("Service: %s (%s) - Base: $%,.2f - Hours: %.1f - %s",
+            serviceName, serviceId, baseCost, estimatedHours, description);
     }
 
     /**
      * Get service information for display
      */
     public String getServiceInfo() {
-        String status = isActive ? "Active" : "Inactive";
-        return String.format("%s - Category: %s - Status: %s - Base Cost: %.2f",
-            serviceName, category, status, baseCost);
+        return String.format("%s - %s [%s] - $%,.2f",
+            serviceName, category, isActive ? "Active" : "Inactive", baseCost);
     }
 
     /**
      * Check if service is available
      */
-    public Boolean isAvailable() {
+    public boolean isAvailable() {
         return isActive;
     }
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SparePart {
     private String partId;
-    private String partName;
+    private String name; // Cambiado de partName a name para consistencia
     private String brand;
     private String category;
     private Double unitPrice;
@@ -25,48 +25,64 @@ public class SparePart {
     /**
      * Check if part is available in stock
      */
-    public Boolean isAvailable() {
-        return quantityInStock > 0;
+    public boolean isAvailable() {
+        return quantityInStock != null && quantityInStock > 0;
     }
 
     /**
      * Check if stock is low
      */
-    public Boolean isLowStock() {
-        return quantityInStock <= minimumStock;
+    public boolean isLowStock() {
+        return minimumStock != null && quantityInStock != null && quantityInStock <= minimumStock;
     }
 
     /**
      * Update stock quantity
      */
-    public void updateStock(Integer quantity) {
-        this.quantityInStock += quantity;
-        if (this.quantityInStock < 0) {
-            this.quantityInStock = 0;
+    public void updateStock(int quantity) {
+        if (quantityInStock != null) {
+            this.quantityInStock += quantity;
+            if (this.quantityInStock < 0) {
+                this.quantityInStock = 0;
+            }
         }
     }
 
     /**
      * Get total value of this part in inventory
      */
-    public Double getTotalValue() {
+    /**
+     * Calculate total value of this part in inventory
+     * @return total value (unitPrice * quantityInStock)
+     */
+    public double getTotalValue() {
+        if (unitPrice == null || quantityInStock == null) {
+            return 0.0;
+        }
         return unitPrice * quantityInStock;
     }
 
     /**
      * Get part information
      */
-    public String getPartInfo() {
-        return String.format("Part: %s (%s) - Brand: %s - Price: %.2f - Stock: %d - Location: %s",
-            partName, partId, brand, unitPrice, quantityInStock, location);
-    }
-
-    /**
-     * Get part summary for display
-     */
     public String getSummary() {
-        String stockStatus = isLowStock() ? "LOW STOCK" : "OK";
-        return String.format("%s - %s - Unit Price: %.2f - Qty: %d (%s)",
-            partName, brand, unitPrice, quantityInStock, stockStatus);
+        return String.format("Part: %s - %s - Stock: %d - Price: $%,.2f - %s",
+            partId, name, 
+            quantityInStock != null ? quantityInStock : 0, 
+            unitPrice != null ? unitPrice : 0.0,
+            isLowStock() ? "[LOW STOCK]" : "");
+    }
+    
+    // Getters adicionales necesarios para Inventory
+    public String getDescription() {
+        return String.format("%s %s (%s)", name, brand, category);
+    }
+    
+    public double getPrice() {
+        return unitPrice != null ? unitPrice : 0.0;
+    }
+    
+    public String getCompatibleVehicleType() {
+        return vehicleType != null ? vehicleType : "UNIVERSAL";
     }
 }

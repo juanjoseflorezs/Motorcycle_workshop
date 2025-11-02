@@ -26,15 +26,23 @@ public class Client {
      * Get full name of the client
      */
     public String getFullName() {
-        return firstName + " " + lastName;
+        return (firstName + " " + lastName).trim();
     }
 
     /**
      * Get contact information
      */
-    public String getContactInfo() {
-        return String.format("Name: %s | Email: %s | Phone: %s | Address: %s, %s",
-            getFullName(), email, phone, address, city);
+    public String getClientInfo() {
+        return String.format("""
+            Client Information:
+            ID: %s
+            Name: %s
+            Document: %s %s
+            Contact: %s | %s
+            Address: %s, %s
+            """,
+            clientId, getFullName(), documentType, documentNumber,
+            email, phone, address, city);
     }
 
     /**
@@ -46,7 +54,6 @@ public class Client {
         this.address = address;
         this.city = city;
     }
-
     /**
      * Get client summary
      */

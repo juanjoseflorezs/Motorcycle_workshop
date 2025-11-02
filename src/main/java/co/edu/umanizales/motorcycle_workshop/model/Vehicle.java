@@ -14,9 +14,9 @@ public abstract class Vehicle {
     private String id;
     private String brand;
     private String model;
-    private Integer year;
+    private int year;
     private String color;
-    private Double price;
+    private double price;
 
     /**
      * Abstract method that must be implemented by subclasses
@@ -26,13 +26,13 @@ public abstract class Vehicle {
     /**
      * Abstract method to calculate maintenance cost
      */
-    public abstract Double calculateMaintenanceCost();
+    public abstract double calculateMaintenanceCost();
 
     /**
      * Common method for all vehicles
      */
     public String getFullDescription() {
-        return String.format("%s - %s %s (%d) - Color: %s", 
-            getVehicleType(), brand, model, year, color);
+        return String.format("%s - %s %s (%d) - Color: %s - Price: $%,.2f", 
+            getVehicleType(), brand, model, year, color, price);
     }
 }
