@@ -1,0 +1,149 @@
+```mermaid
+classDiagram
+    direction TB
+
+    class Saveable {
+      <<interface>>
+      +String toCSV()
+      +String getCSVHeader()
+    }
+
+    class Vehicle {
+      <<abstract>>
+      -String id
+      -String brand
+      -String model
+      -int year
+      -String color
+      -double price
+      +String getVehicleType()
+      +double calculateMaintenanceCost()
+      +String getFullDescription()
+    }
+
+    class Motorcycle {
+      +int engineCC
+      +String transmissionType
+      +boolean hasWindshield
+      +String getVehicleType()
+      +double calculateMaintenanceCost()
+      +String getFullDescription()
+    }
+
+    class Car {
+      +int numberOfDoors
+      +String fuelType
+      +double fuelConsumption
+      +String getVehicleType()
+      +double calculateMaintenanceCost()
+      +String getFullDescription()
+    }
+
+    class Truck {
+      +double loadCapacityTons
+      +int numberOfAxles
+      +String cargoType
+      +String getVehicleType()
+      +double calculateMaintenanceCost()
+      +String getFullDescription()
+    }
+
+    class Client {
+      +String clientId
+      +String firstName
+      +String lastName
+      +String email
+      +String phone
+      +String address
+      +String city
+      +String documentType
+      +String documentNumber
+      +String registrationDate
+      +String getFullName()
+      +String getClientInfo()
+      +void updateProfile(String email, String phone, String address, String city)
+      +String getSummary()
+    }
+
+    class Service {
+      +String serviceId
+      +String serviceName
+      +String description
+      +double baseCost
+      +double estimatedHours
+      +String category
+      +boolean isActive
+      +double calculateCost(double hourlyRate)
+      +String getServiceDetails()
+      +String getServiceInfo()
+      +boolean isAvailable()
+    }
+
+    class SparePart {
+      +String partId
+      +String name
+      +String brand
+      +String category
+      +Double unitPrice
+      +Integer quantityInStock
+      +Integer minimumStock
+      +String vehicleType
+      +String supplier
+      +String location
+      +boolean isAvailable()
+      +boolean isLowStock()
+      +void updateStock(int quantity)
+      +double getTotalValue()
+      +String getSummary()
+      +String getDescription()
+      +double getPrice()
+      +String getCompatibleVehicleType()
+    }
+
+    class Inventory {
+      +String inventoryId
+      +List~SparePart~ spareParts
+      +String lastUpdated
+      +String warehouseLocation
+      +void addPart(SparePart part)
+      +boolean removePart(String partId)
+      +SparePart getPartById(String partId)
+      +List~SparePart~ getLowStockItems()
+      +List~SparePart~ getPartsByVehicleType(String vehicleType)
+      +List~SparePart~ getPartsByCategory(String category)
+      +double getTotalInventoryValue()
+      +int getTotalPartTypes()
+      +int getTotalQuantity()
+      +boolean updatePartStock(String partId, int quantity)
+      +String generateReport()
+      +String getSummary()
+      +String toCSV()
+      +String getCSVHeader()
+    }
+
+    class Maintenance {
+      +String maintenanceId
+      +String vehicleId
+      +LocalDate maintenanceDate
+      +String description
+      +Double cost
+      +String technician
+      +String status
+      +String getSummary()
+    }
+
+    %% Inheritance
+    Vehicle <|-- Motorcycle
+    Vehicle <|-- Car
+    Vehicle <|-- Truck
+
+    %% Composition/Aggregation
+    Inventory *-- "0..*" SparePart : manages
+
+    %% Interface implementation
+    Inventory ..|> Saveable
+
+    %% Associations
+    Maintenance ..> Vehicle : vehicleId
+
+```
