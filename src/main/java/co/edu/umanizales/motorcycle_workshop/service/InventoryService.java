@@ -78,7 +78,7 @@ public class InventoryService {
     public Optional<SparePart> getPartFromInventory(String inventoryId, String partId) {
         Optional<Inventory> inventory = getInventoryById(inventoryId);
         if (inventory.isPresent()) {
-            return inventory.get().getPartById(partId);
+            return Optional.ofNullable(inventory.get().getPartById(partId));
         }
         return Optional.empty();
     }

@@ -159,7 +159,7 @@ public class SparePartService {
         List<SparePart> result = new ArrayList<>();
         String searchTerm = name.toLowerCase();
         for (SparePart part : spareParts) {
-            if (part.getPartName().toLowerCase().contains(searchTerm)) {
+            if (part.getName() != null && part.getName().toLowerCase().contains(searchTerm)) {
                 result.add(part);
             }
         }

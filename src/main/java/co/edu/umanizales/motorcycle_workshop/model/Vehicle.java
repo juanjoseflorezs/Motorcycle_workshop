@@ -32,7 +32,10 @@ public abstract class Vehicle {
      * Common method for all vehicles
      */
     public String getFullDescription() {
-        return String.format("%s - %s %s (%d) - Color: %s - Price: $%,.2f", 
-            getVehicleType(), brand, model, year, color, price);
+        return String.format("%s - %s %s (%d) - Color: %s - Price: $%,.2f",
+                getVehicleType(), brand, model, year, color, price);
     }
+
+    public abstract Object setHasWindshield();
 }
+

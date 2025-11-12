@@ -47,4 +47,9 @@ public class Truck extends Vehicle {
         return String.format("%s - Capacity: %.1f tons - Axles: %d - Cargo: %s", 
             super.getFullDescription(), loadCapacityTons, numberOfAxles, cargoType);
     }
+
+    @Override
+    public Object setHasWindshield() {
+        return null;
+    }
 }

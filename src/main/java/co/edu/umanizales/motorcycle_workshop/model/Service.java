@@ -49,4 +49,7 @@ public class Service {
     public boolean isAvailable() {
         return isActive;
     }
+
+    public void setIsActive(boolean b) {
+    }
 }

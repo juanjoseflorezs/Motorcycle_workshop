@@ -144,6 +144,19 @@ classDiagram
     Inventory ..|> Saveable
 
     %% Associations
-    Maintenance ..> Vehicle : vehicleId
+    Maintenance --> "1" Vehicle : for
+
+    %% Client associations
+    Client o-- "0..*" Vehicle : owns
+    Client <-- "0..*" Maintenance : requestedBy
+
+    %% Service in maintenance
+    Maintenance o-- "0..*" Service : includes
+
+    %% Inventory provides parts to maintenance jobs
+    "1" Inventory <-- "0..*" Maintenance : usesPartsFrom
+
+    %% Services may use spare parts
+    Service "0..*" -- "0..*" SparePart : mayUse
 
 ```

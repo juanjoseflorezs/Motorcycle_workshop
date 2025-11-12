@@ -49,4 +49,9 @@ public class Motorcycle extends Vehicle {
             transmissionType != null ? transmissionType : "N/A", 
             hasWindshield ? "Yes" : "No");
     }
+
+    @Override
+    public Object setHasWindshield() {
+        return null;
+    }
 }

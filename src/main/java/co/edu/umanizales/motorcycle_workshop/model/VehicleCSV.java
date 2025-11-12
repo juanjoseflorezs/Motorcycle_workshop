@@ -25,7 +25,7 @@ public class VehicleCSV implements Saveable {
                 moto.getVehicleType(),
                 moto.getEngineCC(),
                 moto.getTransmissionType(),
-                moto.getHasWindshield());
+                moto.setHasWindshield () );
         } else if (vehicle instanceof Car) {
             Car car = (Car) vehicle;
             return String.format("%s,%s,%s,%d,%s,%.2f,%s,%d,%s,%.1f",
