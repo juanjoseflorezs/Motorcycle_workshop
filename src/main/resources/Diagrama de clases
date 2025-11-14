@@ -1,0 +1,163 @@
++--------------------------------------------------+
+|                    Saveable                      |
+|                 <<interface>>                    |
+|--------------------------------------------------|
+| + toCSV(): String                                 |
+| + getCSVHeader(): String                          |
++--------------------------------------------------+
+
+
+                          implements
+                 +--------------------------------+
+                 |                                |
+                 v                                |
++--------------------------------------------------+
+|                    Inventory                     |
++--------------------------------------------------+
+| - inventoryId: String                            |
+| - spareParts: List<SparePart>                    |
+| - lastUpdated: String                            |
+| - warehouseLocation: String                      |
+|--------------------------------------------------|
+| + addPart(SparePart)                             |
+| + removePart(String): boolean                    |
+| + getPartById(String): SparePart                 |
+| + getLowStockItems(): List<SparePart>            |
+| + getPartsByVehicleType(String): List<SparePart> |
+| + getPartsByCategory(String): List<SparePart>    |
+| + getTotalInventoryValue(): double               |
+| + getTotalPartTypes(): int                       |
+| + getTotalQuantity(): int                        |
+| + updatePartStock(String,int): boolean           |
+| + generateReport(): String                       |
+| + getSummary(): String                           |
+| + toCSV(): String                                |
+| + getCSVHeader(): String                         |
++--------------------------------------------------+
+                    *
+                    | manages
+                    v
++--------------------------------------------------+
+|                    SparePart                     |
++--------------------------------------------------+
+| - partId: String                                 |
+| - name: String                                   |
+| - brand: String                                  |
+| - category: String                               |
+| - unitPrice: Double                               |
+| - quantityInStock: Integer                       |
+| - minimumStock: Integer                           |
+| - vehicleType: String                             |
+| - supplier: String                                |
+| - location: String                                |
+|--------------------------------------------------|
+| + isAvailable(): boolean                          |
+| + isLowStock(): boolean                           |
+| + updateStock(int)                                |
+| + getTotalValue(): double                         |
+| + getSummary(): String                            |
+| + getDescription(): String                        |
+| + getPrice(): double                              |
+| + getCompatibleVehicleType(): String             |
++--------------------------------------------------+
+
+
++--------------------------------------------------+
+|                     Vehicle                      |
+|                 <<abstract>>                     |
++--------------------------------------------------+
+| - id: String                                      |
+| - brand: String                                   |
+| - model: String                                   |
+| - year: int                                       |
+| - color: String                                   |
+| - price: double                                   |
+|--------------------------------------------------|
+| + getVehicleType(): String                        |
+| + calculateMaintenanceCost(): double              |
+| + getFullDescription(): String                    |
+| + setHasWindshield(): Object                      |
++--------------------------------------------------+
+      ^                      ^                     ^
+      |                      |                     |
+      |                      |                     |
++-------------+    +----------------+    +---------------------+
+| Motorcycle  |    |      Car       |    |        Truck        |
++-------------+    +----------------+    +---------------------+
+| - engineCC: int  | - numberOfDoors: int      | - loadCapacityTons: double |
+| - transmissionType: String | - fuelType: String | - numberOfAxles: int      |
+| - hasWindshield: boolean   | - fuelConsumption: double | - cargoType: String   |
+|-----------------|-------------------------|-------------------------------|
+| + getVehicleType()   | + getVehicleType()      | + getVehicleType()        |
+| + calculateMaintenanceCost() | + calculateMaintenanceCost() | + calculateMaintenanceCost() |
+| + getFullDescription() | + getFullDescription() | + getFullDescription()    |
++-----------------+-------------------------+-------------------------------+
+
+
++--------------------------------------------------+
+|                      Client                      |
++--------------------------------------------------+
+| - clientId: String                               |
+| - firstName: String                              |
+| - lastName: String                               |
+| - email: String                                   |
+| - phone: String                                   |
+| - address: String                                 |
+| - city: String                                    |
+| - documentType: String                            |
+| - documentNumber: String                          |
+| - registrationDate: String                        |
+|--------------------------------------------------|
+| + getFullName(): String                           |
+| + getClientInfo(): String                         |
+| + updateProfile(String,String,String,String)      |
+| + getSummary(): String                             |
++--------------------------------------------------+
+          o
+          | owns
+          v
+      (Vehicles)
+
+
++--------------------------------------------------+
+|                    Maintenance                   |
++--------------------------------------------------+
+| - maintenanceId: String                           |
+| - vehicleId: String                                |
+| - maintenanceDate: LocalDate                       |
+| - description: String                               |
+| - cost: Double                                      |
+| - technician: String                                |
+| - status: String                                    |
+|--------------------------------------------------|
+| + getSummary(): String                              |
++--------------------------------------------------+
+          |
+          | for
+          v
+        Vehicle
+
+Maintenance includes Service →
+Maintenance uses parts from Inventory →
+
+
++--------------------------------------------------+
+|                     Service                      |
++--------------------------------------------------+
+| - serviceId: String                               |
+| - serviceName: String                              |
+| - description: String                               |
+| - baseCost: double                                 |
+| - estimatedHours: double                           |
+| - category: String                                 |
+| - isActive: boolean                                |
+|--------------------------------------------------|
+| + calculateCost(double): double                    |
+| + getServiceDetails(): String                      |
+| + getServiceInfo(): String                         |
+| + isAvailable(): boolean                           |
++--------------------------------------------------+
+            |
+            | mayUse
+            v
+        SparePart

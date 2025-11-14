@@ -1,12 +1,14 @@
 package co.edu.umanizales.motorcycle_workshop.service;
 
 import co.edu.umanizales.motorcycle_workshop.model.Saveable;
+import co.edu.umanizales.motorcycle_workshop.repository.VehicleCSV;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +34,13 @@ public class CSVService {
         String filePath = CSV_DIRECTORY + File.separator + fileName + ".csv";
         File file = new File(filePath);
 
-        try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8, true)) {
-            // Write header if file is new
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath), StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            // Write header if file is new or empty
             if (!file.exists() || file.length() == 0) {
                 writer.append(object.getCSVHeader()).append("\n");
             }
             writer.append(object.toCSV()).append("\n");
-            writer.flush();
         }
     }
 
@@ -53,7 +55,8 @@ public class CSVService {
         String filePath = CSV_DIRECTORY + File.separator + fileName + ".csv";
         File file = new File(filePath);
 
-        try (FileWriter writer = new FileWriter(file, StandardCharsets.UTF_8, false)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath), StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
             // Write header
             writer.append(objects.get(0).getCSVHeader()).append("\n");
 
@@ -61,7 +64,6 @@ public class CSVService {
             for (Saveable object : objects) {
                 writer.append(object.toCSV()).append("\n");
             }
-            writer.flush();
         }
     }
 
@@ -95,5 +97,13 @@ public class CSVService {
         String filePath = CSV_DIRECTORY + File.separator + fileName + ".csv";
         File file = new File(filePath);
         return file.exists();
+    }
+
+    public void saveToCSV(VehicleCSV vehicleCSV, String vehiclesFile) {
+        try {
+            saveToCSV((Saveable) vehicleCSV, vehiclesFile);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 }

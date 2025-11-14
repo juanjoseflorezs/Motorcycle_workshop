@@ -1,5 +1,7 @@
 package co.edu.umanizales.motorcycle_workshop.model;
 
+import co.edu.umanizales.motorcycle_workshop.repository.VehicleCSV;
+
 /**
  * Example class demonstrating the use of the Vehicle model
  * This class shows how inheritance, polymorphism, and abstraction work
@@ -68,13 +70,13 @@ public class VehicleExample {
         VehicleCSV carCSV = new VehicleCSV(car);
         VehicleCSV truckCSV = new VehicleCSV(truck);
 
-        System.out.println(motoCSV.getCSVHeader());
+        System.out.println(motoCSV.toString());
         System.out.println(motoCSV.toCSV());
         System.out.println();
-        System.out.println(carCSV.getCSVHeader());
+        System.out.println(carCSV.toString());
         System.out.println(carCSV.toCSV());
         System.out.println();
-        System.out.println(truckCSV.getCSVHeader());
+        System.out.println(truckCSV.toString());
         System.out.println(truckCSV.toCSV());
     }
 

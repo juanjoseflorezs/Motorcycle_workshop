@@ -46,9 +46,4 @@ public class Car extends Vehicle {
         return String.format("%s - Doors: %d - Fuel: %s (%.1f L/100km)", 
             super.getFullDescription(), numberOfDoors, fuelType, fuelConsumption);
     }
-
-    @Override
-    public Object setHasWindshield() {
-        return null;
-    }
 }

@@ -51,5 +51,6 @@ public class Service {
     }
 
     public void setIsActive(boolean b) {
+        this.isActive = b;
     }
 }

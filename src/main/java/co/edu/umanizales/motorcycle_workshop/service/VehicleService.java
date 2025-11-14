@@ -1,6 +1,7 @@
 package co.edu.umanizales.motorcycle_workshop.service;
 
 import co.edu.umanizales.motorcycle_workshop.model.*;
+import co.edu.umanizales.motorcycle_workshop.repository.VehicleCSV;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -154,5 +155,49 @@ public class VehicleService {
 
         return String.format("Total Vehicles: %d | Motorcycles: %d | Cars: %d | Trucks: %d",
                 vehicles.size(), motorcycleCount, carCount, truckCount);
+    }
+
+    /**
+     * Assign an owner (clientId) to a vehicle
+     */
+    public boolean assignOwner(String vehicleId, String clientId) throws IOException {
+        Optional<Vehicle> opt = getVehicleById(vehicleId);
+        if (opt.isPresent()) {
+            opt.get().setOwnerClientId(clientId);
+            // Rewrite CSV to persist current list
+            List<Saveable> saveableVehicles = new ArrayList<>();
+            for (Vehicle v : vehicles) { saveableVehicles.add(new VehicleCSV(v)); }
+            csvService.saveListToCSV(saveableVehicles, VEHICLES_FILE);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Remove owner from a vehicle
+     */
+    public boolean unassignOwner(String vehicleId) throws IOException {
+        Optional<Vehicle> opt = getVehicleById(vehicleId);
+        if (opt.isPresent()) {
+            opt.get().setOwnerClientId(null);
+            List<Saveable> saveableVehicles = new ArrayList<>();
+            for (Vehicle v : vehicles) { saveableVehicles.add(new VehicleCSV(v)); }
+            csvService.saveListToCSV(saveableVehicles, VEHICLES_FILE);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get vehicles owned by a given client
+     */
+    public List<Vehicle> getVehiclesByClient(String clientId) {
+        List<Vehicle> result = new ArrayList<>();
+        for (Vehicle v : vehicles) {
+            if (clientId != null && clientId.equals(v.getOwnerClientId())) {
+                result.add(v);
+            }
+        }
+        return result;
     }
 }

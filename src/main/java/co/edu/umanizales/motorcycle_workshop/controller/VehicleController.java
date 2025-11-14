@@ -104,4 +104,22 @@ public class VehicleController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    // Ownership
+    @GetMapping("/by-client/{clientId}")
+    public ResponseEntity<List<Vehicle>> byClient(@PathVariable String clientId) {
+        return ResponseEntity.ok(vehicleService.getVehiclesByClient(clientId));
+    }
+
+    @PostMapping("/{id}/assign-owner")
+    public ResponseEntity<Void> assignOwner(@PathVariable String id, @RequestParam String clientId) throws IOException {
+        boolean ok = vehicleService.assignOwner(id, clientId);
+        return ok ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/{id}/unassign-owner")
+    public ResponseEntity<Void> unassignOwner(@PathVariable String id) throws IOException {
+        boolean ok = vehicleService.unassignOwner(id);
+        return ok ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
 }
