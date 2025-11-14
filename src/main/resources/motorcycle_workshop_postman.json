@@ -1,0 +1,129 @@
+{
+  "info": {
+    "_postman_id": "4f5c6a21-2c78-4b67-9f1d-2a1e2c3d4e5f",
+    "name": "Motorcycle Workshop API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Motorcycle Workshop controllers. Set baseUrl variable (default http://localhost:8080)."
+  },
+  "item": [
+    {
+      "name": "Clients",
+      "item": [
+        {"name": "Get all clients", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients"}},
+        {"name": "Get client by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients/{{clientId}}"}},
+        {"name": "Create client", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/clients", "body": {"mode": "raw", "raw": "{\n  \"clientId\": \"C001\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"3001234567\",\n  \"address\": \"Street 123\",\n  \"city\": \"City\",\n  \"documentType\": \"ID\",\n  \"documentNumber\": \"123456\",\n  \"registrationDate\": \"2025-01-01\"\n}"}}},
+        {"name": "Update client", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/clients/{{clientId}}", "body": {"mode": "raw", "raw": "{\n  \"clientId\": \"C001\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe Updated\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"3007654321\",\n  \"address\": \"Street 456\",\n  \"city\": \"City\",\n  \"documentType\": \"ID\",\n  \"documentNumber\": \"123456\",\n  \"registrationDate\": \"2025-01-01\"\n}"}}},
+        {"name": "Delete client", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/clients/{{clientId}}"}},
+        {"name": "Get by email", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients/by-email?email={{email}}"}},
+        {"name": "Get by city", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients/by-city?city={{city}}"}},
+        {"name": "Search by name", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients/search?q={{query}}"}},
+        {"name": "Total clients", "request": {"method": "GET", "url": "{{baseUrl}}/api/clients/stats/total"}}
+      ]
+    },
+    {
+      "name": "Vehicles",
+      "item": [
+        {"name": "Get all vehicles", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles"}},
+        {"name": "Get vehicle by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}"}},
+        {"name": "Add motorcycle", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/vehicles/motorcycles", "body": {"mode": "raw", "raw": "{\n  \"id\": \"M001\",\n  \"brand\": \"Honda\",\n  \"model\": \"CBR500R\",\n  \"year\": 2021,\n  \"color\": \"Red\",\n  \"price\": 5000.0,\n  \"engineCC\": 471,\n  \"transmissionType\": \"Manual\",\n  \"hasWindshield\": true\n}"}}},
+        {"name": "Add car", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/vehicles/cars", "body": {"mode": "raw", "raw": "{\n  \"id\": \"C001\",\n  \"brand\": \"Toyota\",\n  \"model\": \"Corolla\",\n  \"year\": 2020,\n  \"color\": \"White\",\n  \"price\": 12000.0,\n  \"numberOfDoors\": 4,\n  \"fuelType\": \"Gasoline\",\n  \"fuelConsumption\": 6.5\n}"}}},
+        {"name": "Add truck", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/vehicles/trucks", "body": {"mode": "raw", "raw": "{\n  \"id\": \"T001\",\n  \"brand\": \"Volvo\",\n  \"model\": \"FH16\",\n  \"year\": 2019,\n  \"color\": \"Gray\",\n  \"price\": 45000.0,\n  \"loadCapacityTons\": 25.0,\n  \"numberOfAxles\": 3,\n  \"cargoType\": \"General\"\n}"}}},
+        {"name": "Update vehicle", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}", "body": {"mode": "raw", "raw": "{\n  \"id\": \"M001\",\n  \"brand\": \"Honda\",\n  \"model\": \"CBR500R\",\n  \"year\": 2022,\n  \"color\": \"Black\",\n  \"price\": 5200.0,\n  \"engineCC\": 471,\n  \"transmissionType\": \"Manual\",\n  \"hasWindshield\": true\n}"}}},
+        {"name": "Delete vehicle", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/vehicles/{{vehicleId}}"}},
+        {"name": "All motorcycles", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/motorcycles"}},
+        {"name": "All cars", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/cars"}},
+        {"name": "All trucks", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/trucks"}},
+        {"name": "Highest maintenance cost", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/maintenance/highest"}},
+        {"name": "Total maintenance cost", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/stats/maintenance/total"}},
+        {"name": "Type stats", "request": {"method": "GET", "url": "{{baseUrl}}/api/vehicles/stats/type"}}
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {"name": "Get all services", "request": {"method": "GET", "url": "{{baseUrl}}/api/services"}},
+        {"name": "Get active services", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/active"}},
+        {"name": "Get service by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/{{serviceId}}"}},
+        {"name": "Create service", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/services", "body": {"mode": "raw", "raw": "{\n  \"serviceId\": \"S001\",\n  \"serviceName\": \"Oil Change\",\n  \"description\": \"Change engine oil\",\n  \"baseCost\": 30.0,\n  \"estimatedHours\": 1.0,\n  \"category\": \"Maintenance\",\n  \"isActive\": true\n}"}}},
+        {"name": "Update service", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/services/{{serviceId}}", "body": {"mode": "raw", "raw": "{\n  \"serviceId\": \"S001\",\n  \"serviceName\": \"Oil + Filter Change\",\n  \"description\": \"Change engine oil and filter\",\n  \"baseCost\": 45.0,\n  \"estimatedHours\": 1.5,\n  \"category\": \"Maintenance\",\n  \"isActive\": true\n}"}}},
+        {"name": "Delete service", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/services/{{serviceId}}"}},
+        {"name": "By category", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/by-category?category={{category}}"}},
+        {"name": "Search services", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/search?q={{query}}"}},
+        {"name": "Activate service", "request": {"method": "POST", "url": "{{baseUrl}}/api/services/{{serviceId}}/activate"}},
+        {"name": "Deactivate service", "request": {"method": "POST", "url": "{{baseUrl}}/api/services/{{serviceId}}/deactivate"}},
+        {"name": "Average cost", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/stats/average-cost"}},
+        {"name": "Total services", "request": {"method": "GET", "url": "{{baseUrl}}/api/services/stats/total"}}
+      ]
+    },
+    {
+      "name": "Spare Parts",
+      "item": [
+        {"name": "Get all parts", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts"}},
+        {"name": "Get part by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/{{partId}}"}},
+        {"name": "Create part", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/spare-parts", "body": {"mode": "raw", "raw": "{\n  \"partId\": \"P001\",\n  \"name\": \"Oil Filter\",\n  \"brand\": \"Bosch\",\n  \"category\": \"Filters\",\n  \"unitPrice\": 10.0,\n  \"quantityInStock\": 20,\n  \"minimumStock\": 5,\n  \"vehicleType\": \"Motorcycle\",\n  \"supplier\": \"Supplier A\",\n  \"location\": \"A1-01\"\n}"}}},
+        {"name": "Update part", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/spare-parts/{{partId}}", "body": {"mode": "raw", "raw": "{\n  \"partId\": \"P001\",\n  \"name\": \"Oil Filter Premium\",\n  \"brand\": \"Bosch\",\n  \"category\": \"Filters\",\n  \"unitPrice\": 12.5,\n  \"quantityInStock\": 25,\n  \"minimumStock\": 5,\n  \"vehicleType\": \"Motorcycle\",\n  \"supplier\": \"Supplier A\",\n  \"location\": \"A1-02\"\n}"}}},
+        {"name": "Delete part", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/spare-parts/{{partId}}"}},
+        {"name": "Available parts", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/available"}},
+        {"name": "Low stock parts", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/low-stock"}},
+        {"name": "Update stock", "request": {"method": "PATCH", "url": "{{baseUrl}}/api/spare-parts/{{partId}}/stock?quantity={{quantity}}"}},
+        {"name": "By vehicle type", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/by-vehicle-type?vehicleType={{vehicleType}}"}},
+        {"name": "By category", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/by-category?category={{category}}"}},
+        {"name": "By brand", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/by-brand?brand={{brand}}"}},
+        {"name": "Search parts", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/search?q={{query}}"}},
+        {"name": "By price range", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/by-price-range?min={{minPrice}}&max={{maxPrice}}"}},
+        {"name": "Total value", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/stats/total-value"}},
+        {"name": "Total quantity", "request": {"method": "GET", "url": "{{baseUrl}}/api/spare-parts/stats/total-quantity"}}
+      ]
+    },
+    {
+      "name": "Inventories",
+      "item": [
+        {"name": "Get all inventories", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories"}},
+        {"name": "Get inventory by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}"}},
+        {"name": "Create inventory", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/inventories", "body": {"mode": "raw", "raw": "{\n  \"inventoryId\": \"INV-001\",\n  \"warehouseLocation\": \"Main Warehouse\"\n}"}}},
+        {"name": "Delete inventory", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}"}},
+        {"name": "Add part to inventory", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts", "body": {"mode": "raw", "raw": "{\n  \"partId\": \"P002\",\n  \"name\": \"Brake Pads\",\n  \"brand\": \"Brembo\",\n  \"category\": \"Brakes\",\n  \"unitPrice\": 40.0,\n  \"quantityInStock\": 10,\n  \"minimumStock\": 3,\n  \"vehicleType\": \"Motorcycle\",\n  \"supplier\": \"Supplier B\",\n  \"location\": \"B2-01\"\n}"}}},
+        {"name": "Get part from inventory", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/{{partId}}"}},
+        {"name": "Update stock in inventory", "request": {"method": "PATCH", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/{{partId}}/stock?quantity={{quantity}}"}},
+        {"name": "Remove part from inventory", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/{{partId}}"}},
+        {"name": "Low stock in inventory", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/low-stock"}},
+        {"name": "Parts by vehicle type in inventory", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/by-vehicle-type?vehicleType={{vehicleType}}"}},
+        {"name": "Parts by category in inventory", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/parts/by-category?category={{category}}"}},
+        {"name": "Inventory total value", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/stats/total-value"}},
+        {"name": "Inventory total types", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/stats/total-types"}},
+        {"name": "Inventory total quantity", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/stats/total-quantity"}},
+        {"name": "Inventory report", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/report"}},
+        {"name": "Inventory summary", "request": {"method": "GET", "url": "{{baseUrl}}/api/inventories/{{inventoryId}}/summary"}}
+      ]
+    },
+    {
+      "name": "Maintenances",
+      "item": [
+        {"name": "Get all maintenances", "request": {"method": "GET", "url": "{{baseUrl}}/api/maintenances"}},
+        {"name": "Get maintenance by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/maintenances/{{maintenanceId}}"}},
+        {"name": "Get maintenances by vehicle", "request": {"method": "GET", "url": "{{baseUrl}}/api/maintenances/by-vehicle/{{vehicleId}}"}},
+        {"name": "Create maintenance", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/maintenances", "body": {"mode": "raw", "raw": "{\n  \"maintenanceId\": \"MT001\",\n  \"vehicleId\": \"M001\",\n  \"maintenanceDate\": \"2025-01-10\",\n  \"description\": \"General service\",\n  \"cost\": 120.0,\n  \"technician\": \"Tech A\",\n  \"status\": \"OPEN\"\n}"}}},
+        {"name": "Update maintenance", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "url": "{{baseUrl}}/api/maintenances/{{maintenanceId}}", "body": {"mode": "raw", "raw": "{\n  \"maintenanceId\": \"MT001\",\n  \"vehicleId\": \"M001\",\n  \"maintenanceDate\": \"2025-01-12\",\n  \"description\": \"General service + brakes\",\n  \"cost\": 180.0,\n  \"technician\": \"Tech B\",\n  \"status\": \"CLOSED\"\n}"}}},
+        {"name": "Delete maintenance", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/maintenances/{{maintenanceId}}"}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "clientId", "value": "C001"},
+    {"key": "email", "value": "john@example.com"},
+    {"key": "city", "value": "City"},
+    {"key": "query", "value": "john"},
+    {"key": "vehicleId", "value": "M001"},
+    {"key": "serviceId", "value": "S001"},
+    {"key": "partId", "value": "P001"},
+    {"key": "inventoryId", "value": "INV-001"},
+    {"key": "minPrice", "value": "0"},
+    {"key": "maxPrice", "value": "1000"},
+    {"key": "brand", "value": "Bosch"},
+    {"key": "vehicleType", "value": "Motorcycle"},
+    {"key": "category", "value": "Maintenance"},
+    {"key": "quantity", "value": "5"},
+    {"key": "maintenanceId", "value": "MT001"}
+  ]
+}
