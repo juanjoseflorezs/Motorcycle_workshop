@@ -1,0 +1,17 @@
+ID,Brand,Model,Year,Color,Price,Type,EngineCC,TransmissionType,HasWindshield
+M001,Honda,CBR500R,2021,Red,5000,00,Motorcycle,471,Manual,null
+C001,Toyota,Corolla,2020,White,12000,00,Car,4,Gasoline,6,5
+T001,Volvo,FH16,2019,Gray,45000,00,Truck,25,0,3,General
+M001,Honda,CBR500R,2021,Red,5000,00,Motorcycle,471,Manual,true
+C001,Toyota,Corolla,2020,White,12000,00,Car,4,Gasoline,6,5
+T001,Volvo,FH16,2019,Gray,45000,00,Truck,25,0,3,General
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
+t900,Volvo,FH,2021,white,150000,00,Truck,0,0,3,null
+c001,Mazda,3,2020,red,48000,00,Car,4,Gasolina,0,0
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
+c001,Mazda,3,2020,red,48000,00,Car,4,Gasolina,0,0
+t900,Volvo,FH,2021,white,150000,00,Truck,0,0,3,null
+m005,ns,200,2022,blue,5500,00,Motorcycle,471,Manual,true
