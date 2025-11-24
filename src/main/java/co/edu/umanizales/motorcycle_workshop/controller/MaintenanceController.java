@@ -1,6 +1,7 @@
 package co.edu.umanizales.motorcycle_workshop.controller;
 
 import co.edu.umanizales.motorcycle_workshop.model.Maintenance;
+import co.edu.umanizales.motorcycle_workshop.model.PartUsage;
 import co.edu.umanizales.motorcycle_workshop.service.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +35,22 @@ public class MaintenanceController {
         return ResponseEntity.ok(maintenanceService.getByVehicleId(vehicleId));
     }
 
+    @GetMapping("/by-client/{clientId}")
+    public ResponseEntity<List<Maintenance>> byClient(@PathVariable String clientId) {
+        return ResponseEntity.ok(maintenanceService.getByClientId(clientId));
+    }
+
+    @GetMapping("/by-service/{serviceId}")
+    public ResponseEntity<List<Maintenance>> byService(@PathVariable String serviceId) {
+        return ResponseEntity.ok(maintenanceService.getByServiceId(serviceId));
+    }
+
     @PostMapping
     public ResponseEntity<Maintenance> create(@RequestBody Maintenance maintenance) {
-        maintenanceService.addMaintenance(maintenance);
+        boolean ok = maintenanceService.addMaintenance(maintenance);
+        if (!ok) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok(maintenance);
     }
 
@@ -51,5 +65,19 @@ public class MaintenanceController {
     public ResponseEntity<Void> delete(@PathVariable String maintenanceId) {
         boolean ok = maintenanceService.deleteMaintenance(maintenanceId);
         return ok ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    // Parts usage management
+    @GetMapping("/{maintenanceId}/parts")
+    public ResponseEntity<List<PartUsage>> getParts(@PathVariable String maintenanceId) {
+        return maintenanceService.getPartsForMaintenance(maintenanceId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/{maintenanceId}/parts")
+    public ResponseEntity<Void> addParts(@PathVariable String maintenanceId, @RequestBody List<PartUsage> parts) {
+        boolean ok = maintenanceService.addPartsToMaintenance(maintenanceId, parts);
+        return ok ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
     }
 }

@@ -1,7 +1,9 @@
 package co.edu.umanizales.motorcycle_workshop.controller;
 
 import co.edu.umanizales.motorcycle_workshop.model.Client;
+import co.edu.umanizales.motorcycle_workshop.model.Maintenance;
 import co.edu.umanizales.motorcycle_workshop.service.ClientService;
+import co.edu.umanizales.motorcycle_workshop.service.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService clientService;
+    private final MaintenanceService maintenanceService;
 
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, MaintenanceService maintenanceService) {
         this.clientService = clientService;
+        this.maintenanceService = maintenanceService;
     }
 
     @GetMapping
@@ -67,5 +71,10 @@ public class ClientController {
     @GetMapping("/stats/total")
     public ResponseEntity<Integer> total() {
         return ResponseEntity.ok(clientService.getTotalClients());
+    }
+
+    @GetMapping("/{clientId}/maintenances")
+    public ResponseEntity<List<Maintenance>> getMaintenancesByClient(@PathVariable String clientId) {
+        return ResponseEntity.ok(maintenanceService.getByClientId(clientId));
     }
 }
